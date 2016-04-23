@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/174060/e57295e2745945c1aa4336f1e9171f38
+bundleId: https://api.rpubs.com/api/v1/document/174060/e57295e2745945c1aa4336f1e9171f38
+url: http://rpubs.com/tomlous/174060
+when: 1461414026.24713
