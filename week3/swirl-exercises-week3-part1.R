@@ -55,5 +55,29 @@ swirl()
   # b2+b3*5
   
 #9
+  fit <- lm(y ~ x, out2)
+  plot(fit,which=1)
+  # No. There is a linear pattern involving all but one residual and the fit.
+  # 1
+  fitno <- lm(y ~ x, out2[-1,])
+  plot(fitno,which=1)
+  coef(fit) - coef(fitno)
+  View(dfbeta(fit))
+  resno <- out2[1, "y"] - predict(fitno, out2[1,])
+  1-resid(fit)[1]/resno
+  View(hatvalues(fit))
+  sigma <- sqrt(sum(resid(fit)^2) / fit$df.residual)
+  rstd <- resid(fit) / (sigma*sqrt(1-hatvalues(fit)))
+  head(cbind(rstd, rstandard(fit)))
+  plot(fit,which=3)
+  plot(fit, which=2)
+  # About -5
+  sigma1 <- sqrt(deviance(fitno)/df.residual(fitno))
+  resid(fit)[1]/(sigma1*sqrt(1-hatvalues(fit)[1]))
+  head(rstudent(fit))
+  dy <- predict(fitno, out2)-predict(fit, out2)
+  sum(dy^2)/(2*sigma^2)
+  plot(fit, which=5)
+  
   
   
