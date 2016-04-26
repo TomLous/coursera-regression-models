@@ -1,0 +1,54 @@
+---
+title: "Moter Trend -  The relationship between a set of variables and miles per gallon"
+author: "Tom Lous"
+date: "26 April 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summary
+
+We are looking at a data set of a collection of cars, and are interested in exploring the relationship between a set of variables and miles per gallon. In particularly the following two questions:
+
+* “Is an automatic or manual transmission better for MPG”
+* "Quantify the MPG difference between automatic and manual transmissions"
+
+
+## Processing
+
+First change 'am' to  factor (0 = automatic, 1 = manual)
+Also use this for other properties: 
+
+```{r}
+data(mtcars)
+
+mtcars$am <- as.factor(mtcars$am)
+levels(mtcars$am) <- c("automatic", "manual")
+
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+
+
+```
+
+## Exploratory data analyses 
+
+Look at the ranges of 
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
+library(GGally)
+library(dplyr)
+p <- ggplot(mtcars, aes(am, mpg))
+p + geom_boxplot(aes(fill = am))
+
+mtcars %>% 
+   select(mpg, disp, hp, wt, cyl, am) %>% 
+   ggpairs(
+     mapping = ggplot2::aes(color = am), 
+     upper = list(continuous = "density", combo = "box"), 
+     lower = list(continuous = "smooth"))
+```
+
